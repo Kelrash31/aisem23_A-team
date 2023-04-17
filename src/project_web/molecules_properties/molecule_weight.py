@@ -25,7 +25,14 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
+    molecule_weight_value = [float(d["molecule_properties"]["full_mwt"]) for d in raw_data if d["molecule_properties"]["full_mwt"]]
+    return dict(component="Molecule weight",
+            data=molecule_weight_value,
+            mean=np.mean(molecule_weight_value),
+            std=np.std(molecule_weight_value),
+            max_value=np.max(molecule_weight_value),
+            min_value=np.min(molecule_weight_value)
+            )
     
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
