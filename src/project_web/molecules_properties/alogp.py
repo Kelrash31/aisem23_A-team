@@ -25,7 +25,14 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
+    alogp_values = [int(d["molecule_properties"]["alogp"]) for d in raw_data if d["molecule_properties"]["alogp"]]
+    return dict(component="alogP properties:",
+                data=alogp_values,
+                mean=np.mean(alogp_values),
+                std=np.std(alogp_values),
+                max_value=np.max(alogp_values),
+                min_value=np.min(alogp_values)
+                )
     
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
