@@ -25,7 +25,15 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
+    ro5_values = [int(d["molecule_properties"]["num_ro5_violations"]) for d in raw_data if d["molecule_properties"]["num_ro5_violations"]]
+    return dict(
+        component="ro5",
+        data=ro5_values,
+        mean=np.mean(ro5_values),
+        std=np.std(ro5_values),
+        max_value=np.max(ro5_values),
+        min_value=np.min(ro5_values)
+    )
     
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
