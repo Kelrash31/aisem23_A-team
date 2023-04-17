@@ -25,7 +25,14 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
+    Tanimoto_similarity = [int(d["similarity"])for d in raw_data if d["similarity"]]
+    return dict(component="Tanimoto similarity",
+                data=Tanimoto_similarity,
+                mean=np.mean(Tanimoto_similarity),
+                std=np.std(Tanimoto_similarity),
+                max_value=np.max(Tanimoto_similarity),
+                min_value=np.min(Tanimoto_similarity)
+                )
     
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
